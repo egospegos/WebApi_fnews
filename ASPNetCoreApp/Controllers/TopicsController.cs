@@ -172,6 +172,7 @@ namespace ASPNetCoreApp.Controllers
 			return NoContent();
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpPut]
 		[Route("{TopicId}/novelties/{NoveltyId}")]
 		public async Task<IActionResult> UpdateNovelty([FromRoute] int TopicId, int NoveltyId,[FromBody] Novelty novelty)

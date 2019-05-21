@@ -14,6 +14,7 @@ using ASPNetCoreApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
+using ASPNetCoreApp.DAL;
 
 namespace ASPNetCoreApp
 {
@@ -29,6 +30,8 @@ namespace ASPNetCoreApp
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddScoped<ILikeRepos, LikeRepos>();
+
 			services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<fnewsContext>();
 			var connection = Configuration.GetConnectionString("DefaultConnection");
 			services.AddDbContext<fnewsContext>(options => options.UseSqlServer(connection));
