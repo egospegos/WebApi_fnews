@@ -1,0 +1,30 @@
+﻿body {
+}
+
+#editDiv {
+    display: none;
+}
+
+.topicText {
+    padding: 5px;
+    font-weight: bold;
+}
+
+button {
+    margin-left: 5px;
+}
+
+.myb {
+    margin: 10px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.myb:hover{
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.MsgClass {
+    color: red;
+}

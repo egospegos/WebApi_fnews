@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ногоновости</title>
+	<link href="css/styles.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body>
+	<!--ШАПКА-->
+	<div class="container-fluid bg-dark text-light">
+		<div class="row">
+			<!--ЭМБЛЕМЫ ФУТБОЛЬНЫХ КЛУБОВ СЛЕВА-->
+			<div class="col-5 d-flex justify-content-between mt-2">
+				<img src="http://sportemblem.co.ua/img/eng/totnem_new.gif" style="width:100px; height:100px;">
+				<img src="http://www.o-spain.ru/images/fc_barcelona.gif" style="width:100px; height:100px;">
+				<img src="https://upload.wikimedia.org/wikipedia/ru/thumb/d/df/FC_Krasnodar_2016_logo_new.svg/1066px-FC_Krasnodar_2016_logo_new.svg.png" style="width:100px; height:100px;">
+			</div>
+
+			<!--ЗАГОЛОВОК-->
+			<div class="text-center mt-4 col-2">
+				<h4>Ногоновости</h4>
+				<p style="font-size: 13px;" id="counter"></p>
+				<!--<div id="actionMsg" class="MsgClass"></div>-->
+			</div>
+
+			<!--ЭМБЛЕМЫ ФУТБОЛЬНЫХ КЛУБОВ СПРАВА-->
+			<div class="col-5 d-flex justify-content-between mt-2">
+				<img src="http://www.o-italy.ru/images/ssc_napoli.gif" style="width:100px; height:100px;">
+				<img src="https://i.pinimg.com/originals/4b/14/67/4b1467f52db844753001aa545b5ace02.png" style="width:100px; height:100px;">
+				<a href="https://uniliga.ru/ivanovskaya-oblast/unileague/spring2019/commands/5566">
+					<img src="https://uniliga.ru/assets/thumbnail/200x200/fixWrE6b.png" style="width:100px; height:100px;">
+				</a>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--КНОПКИ ВОЙТИ ВЫЙТИ РЕГИСТРАИЦИЯ-->
+	<div class="container-fluid bg-dark text-light">
+		<div class="row">
+
+
+			<div class="text-right mt-4 col-12">
+				<div class="msgClass">
+					<div id="msg"></div>
+					<ul id="formError"></ul>
+				</div>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ModalLogin">Войти</button>
+					<button type="button" class="btn btn-secondary" id="logoffBtn" >Выйти</button>
+					<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Регистрация" onClick='location.href="register.html"'>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Подгружаем все темы и новости к ним-->
+
+	<div class="container">
+
+		<div>
+			<div id="topicsDiv"></div>
+		</div>
+	</div>
+
+	   	 
+
+
+	<!--МОДАЛЬНОЕ ОКНО ДЛЯ ВХОДА-->
+	<div class="modal fade" id="ModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Вход</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+
+						<div class="input-group flex-nowrap">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="addon-wrapping" style="width: 140px;">Email   </span>
+							</div>
+							<input type="text" id="Email" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping">
+						</div>
+
+						<div class="input-group flex-nowrap">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="addon-wrapping" style="width: 140px;">Пароль</span>
+							</div>
+							<input type="password" id="Password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="addon-wrapping">
+						</div>
+
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="loginBtn">Войти</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!--МОДАЛЬНОЕ ОКНО СОЗДАНИЯ НОВОЙ ТЕМЫ-->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Создание новой темы</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+
+						<div class="input-group flex-nowrap">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="addon-wrapping" style="width: 140px;">Название темы</span>
+							</div>
+							<input type="URL" id="topicnameDiv" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping">
+						</div>
+
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="createTopic(); return false;">Создать</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!--МОДАЛЬНОЕ ОКНО ДЛЯ ИЗМЕНЕНИЯ ТЕМЫ-->
+	<div class="modal fade" id="modalChange" tabindex="-1" role="dialog" aria-labelledby="modalChangeLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Изменение темы</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="editDiv">
+						<form class="my-form">
+
+							<div class="input-group flex-nowrap" style="display: none;">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="addon-wrapping" style="width: 140px;">ID</span>
+								</div>
+								<input type="Text" id="edit-id" class="form-control" placeholder="Id" aria-label="Username" aria-describedby="addon-wrapping">
+							</div>
+
+							
+
+							<div class="input-group flex-nowrap">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="addon-wrapping" style="width: 140px;">Название темы</span>
+								</div>
+								<input type="URL" id="edit-name" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping">
+							</div>
+
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="udateTopic(); return false;">Изменить</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--МОДАЛЬНОЕ ОКНО ДЛЯ СОЗДАНИЯ НОВОСТИ-->
+	<div class="modal fade" id="createModalNov" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Создание новости</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<form>
+							<div class="input-group flex-nowrap">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="addon-wrapping" style="width: 120px;">Заголовок</span>
+								</div>
+								<input type="text" id="createDivNov" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="addon-wrapping">
+							</div>
+							<div class="input-group flex-nowrap">
+								<div class="input-group-prepend">
+									<span class="input-group-text" style="width: 120px;">Содержание</span>
+								</div>
+								<textarea class="form-control" id="noveltyContentDiv" style="height: 250px;" aria-label="With textarea"></textarea>
+							</div>
+
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="createNovelty(); return false;">Создать</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--МОДАЛЬНОЕ ОКНО ДЛЯ ИЗМЕНЕНИЯ НОВОСТИ-->
+	<div class="modal fade" id="modalChangeNovelty" tabindex="-1" role="dialog" aria-labelledby="modalChangeLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Изменение новости</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="edit2Div">
+						<form class="my-form">
+
+							<div class="input-group flex-nowrap" style="display: none;">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="addon-wrapping" style="width: 140px;">ID</span>
+								</div>
+								<input type="Text" id="edit2-idTopic" class="form-control" placeholder="Id" aria-label="Username" aria-describedby="addon-wrapping">
+							</div>
+
+							<div class="input-group flex-nowrap" style="display: none;">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="addon-wrapping" style="width: 140px;">ID</span>
+								</div>
+								<input type="Text" id="edit2-idNovelty" class="form-control" placeholder="Id" aria-label="Username" aria-describedby="addon-wrapping">
+							</div>
+
+							<div class="input-group flex-nowrap">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="addon-wrapping" style="width: 140px;">Заголовок</span>
+								</div>
+								<input type="text" id="edit2-title" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="addon-wrapping">
+							</div>
+
+							<div class="input-group flex-nowrap">
+								<div class="input-group-prepend">
+									<span class="input-group-text" style="width: 140px;">Содержание</span>
+								</div>
+								<textarea class="form-control" id="edit2-content" style="height: 250px;" aria-label="With textarea"></textarea>
+							</div>
+
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="updateNovelty(); return false;">Изменить</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/scripts.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
