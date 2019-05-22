@@ -3,18 +3,12 @@ const uri = "/api/topics/";
 const uri2 = "/api/account/Register";
 const urilike = "/api/like/";
 
-let items = null;
-let globalTop;
-let globalNov;
-let isAdm;
-var Role = "";
-var RoleID = "";
 
 document.addEventListener("DOMContentLoaded", function (event) {
     TopicManager.getTopics();
     document.getElementById("loginBtn").addEventListener("click", LogManager.logIn);
     document.getElementById("logoffBtn").addEventListener("click", LogManager.logOff);
-    getCurrentUser();
+    UserManager.getCurrentUser();
 });
 
 
@@ -22,7 +16,7 @@ var TopicManager = (function () {
 
     //вывести все темы и новости к ним
     function getTopics() {
-        GetRole();
+        UserManager.GetRole();
 
                     let request = new XMLHttpRequest();
                     request.open("GET", uri);
@@ -130,6 +124,8 @@ var TopicManager = (function () {
         let nameText = "";
 
         nameText = document.querySelector("#topicnameDiv").value;
+         //очитка полей для ввода в модальном окне
+        document.querySelector("#topicnameDiv").value = "";
         var request = new XMLHttpRequest();
         request.open("POST", uri);
         request.onload = function () {
@@ -254,6 +250,9 @@ var NoveltyManager = (function () {
         let contentText = ""; //содержание
         titleText = document.querySelector("#createDivNov").value;
         contentText = document.querySelector("#noveltyContentDiv").value;
+        //очитка полей для ввода в модальном окне
+        document.querySelector("#createDivNov").value ="";
+        document.querySelector("#noveltyContentDiv").value="";
         var request = new XMLHttpRequest();
         var request2 = new XMLHttpRequest();
 
@@ -383,6 +382,10 @@ var LogManager = (function () {
         // Считывание данных с формы
         email = document.getElementById("Email").value;
         password = document.getElementById("Password").value;
+        //очистка полей для ввода в модальном окне
+        document.getElementById("Email").value = "";
+        document.getElementById("Password").value = "";
+
         var request = new XMLHttpRequest();
         request.open("POST", "/api/Account/Login");
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -464,7 +467,7 @@ var LikeManager = (function () {
     }
     //добавить лайк новости
     function addLike(id) {
-        GetRoleID();
+        UserManager.GetRoleID();
         var novelty = id;
         var user = RoleID;
         var request = new XMLHttpRequest();
@@ -486,6 +489,50 @@ var LikeManager = (function () {
 })();
 
 
+var UserManager = (function () {
+
+    //получить текущего юзера
+    function getCurrentUser() {
+        let request = new XMLHttpRequest();
+        request.open("POST", "/api/Account/isAuthenticated", true);
+        request.onload = function () {
+            let myObj = "";
+
+
+            myObj = request.responseText !== "" ?
+                JSON.parse(request.responseText) : {};
+            document.getElementById("msg").innerHTML = myObj.message;
+        };
+        request.send();
+    }
+
+    //получить роль пользователя
+    function GetRole() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "api/Account/GetRole", false);
+        request.onload = function () {
+            Role = JSON.parse(request.responseText);
+        }
+        request.send();
+    }
+
+    //получить айди пользователя
+    function GetRoleID() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "api/Account/GetRoleID", false);
+        request.onload = function () {
+            RoleID = JSON.parse(request.responseText);
+        }
+        request.send();
+    }
+
+    return {
+        getCurrentUser: getCurrentUser,
+        GetRole: GetRole,
+        GetRoleID: GetRoleID
+    }
+})();
+
 
 //закрытие
 function closeInput() {
@@ -494,43 +541,12 @@ function closeInput() {
 }
 
 
-
-//получить текущего юзера
-function getCurrentUser() {
-    let request = new XMLHttpRequest();
-    request.open("POST", "/api/Account/isAuthenticated", true);
-    request.onload = function () {
-        let myObj = "";
-        
-
-        myObj = request.responseText !== "" ?
-            JSON.parse(request.responseText) : {};
-        document.getElementById("msg").innerHTML = myObj.message;
-    };
-    request.send();
-}
-
-
-//получить роль пользователя
-function GetRole() {
-    var request = new XMLHttpRequest();
-    request.open("GET", "api/Account/GetRole", false);
-    request.onload = function () {
-        Role = JSON.parse(request.responseText);
-    }
-    request.send();
-}
-//получить айди пользователя
-function GetRoleID() {
-    var request = new XMLHttpRequest();
-    request.open("GET", "api/Account/GetRoleID", false);
-    request.onload = function () {
-        RoleID = JSON.parse(request.responseText);
-    }
-    request.send();
-}
-
-
+let items = null;
+let globalTop;
+let globalNov;
+let isAdm;
+var Role = "";
+var RoleID = "";
 
 
 
